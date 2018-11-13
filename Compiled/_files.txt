@@ -1,0 +1,21 @@
+========================================================================
+                   The CasLink Project: CasLink v3.1
+                Copyright (c) 1999-2018 Alexey Podrezov
+========================================================================
+
+List of files:
+
+Caslink3.exe	- main executable, needs to have LAME MP3 encoder's files around
+
+binload.bin	- compiled loader
+l32k1.bin	- compiled loader
+l32k2.bin	- compiled loader
+l32k2rst.bin	- compiled loader
+l49k1.bin	- compiled loader
+l49k2.bin	- compiled loader
+l49k3.bin	- compiled loader
+l49k3rst.bin	- compiled loader
+mulfload.bin	- compiled loader
+preload.bin	- compiled loader
+rloader.bin	- compiled loader
+rloadrst.bin	- compiled loader

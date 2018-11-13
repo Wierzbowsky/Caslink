@@ -1,0 +1,14 @@
+========================================================================
+                   The CasLink Project: CasLink v3.1
+                Copyright (c) 1999-2018 Alexey Podrezov
+========================================================================
+
+List of files:
+
+putup.bas	- program in Basic
+putup.wav	- converted file, to load use command: load"cas:",r
+
+testram.rom	- binary ROM image
+testram1200.wav	- converted file at 1200 baud, to load use command: bload"cas:",r
+testram2400.wav	- converted file at 2400 baud, to load use command: bload"cas:",r
+testram3600.wav	- converted file at 3600 baud, to load use command: bload"cas:",r

@@ -1,0 +1,10 @@
+========================================================================
+                   The CasLink Project: CasLink v3.1
+                Copyright (c) 1999-2018 Alexey Podrezov
+========================================================================
+
+List of files:
+
+lame.exe	- LAME MP3 encoder, needed by Caslink3.exe
+lame_enc.dll	- LAME MP3 encoder library, needed by Caslink3.exe
+
