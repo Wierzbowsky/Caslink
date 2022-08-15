@@ -1,6 +1,6 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.1
-                Copyright (c) 1999-2018 Alexey Podrezov
+                   The CasLink Project: CasLink v3.2
+                Copyright (c) 1999-2022 Alexey Podrezov
 ========================================================================
 
 Contents
@@ -457,6 +457,7 @@ Below is the history of changes made in the CasLink projects by its developer:
  Podrezov   21/05/2016   Fixed missing C flag clearing before ADC and SBC operations - the set flag could affect the operations
  Podrezov   04/03/2018   Fixed the 2400 baud file generation so that it is also accepted by emulators; adjusted the length of headers,
                          verified the highest baud rate to be around 3000 baud
+ Podrezov   14/08/2022   Fixed the patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
 
 
 8. Copyrights
@@ -499,6 +500,7 @@ CasLink project:
  Timo Soilamaa (Nyyrikki)
  Ahti Soilamaa
  Saku Taipale (STT)
+ Walter van Niftrik
 
 
 10. Contact Information and Donations
