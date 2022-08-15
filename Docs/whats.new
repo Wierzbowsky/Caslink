@@ -1,7 +1,13 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.1
-                Copyright (c) 1999-2018 Alexey Podrezov
+                   The CasLink Project: CasLink v3.2
+                Copyright (c) 1999-2022 Alexey Podrezov
 ========================================================================
+
+New features in Version 3.2
+---------------------------
+
+1. Bugfix for patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
+
 
 New features in Version 3.1
 ---------------------------
@@ -11,8 +17,8 @@ New features in Version 3.1
 2. The 3600 baud rate was discovered to be quite inaccurate. In most of cases the speed varies from 2880 or 3000 baud
 
 
-New features in Version 3
--------------------------
+New features in Version 3.0
+---------------------------
 
 1. The /r option has been introduced - it allows to select the option to reset a computer after loading a ROM image. If
    some game does not work with /e option, it may work with /r option

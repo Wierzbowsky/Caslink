@@ -1,6 +1,6 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.1
-                Copyright (c) 1999-2018 Alexey Podrezov
+                   The CasLink Project: CasLink v3.2
+                Copyright (c) 1999-2022 Alexey Podrezov
 ========================================================================
 
 List of files:

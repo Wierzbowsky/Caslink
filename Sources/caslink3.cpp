@@ -1,46 +1,47 @@
 //******************************************************************************
 //  FILE..........: CASLINK3.C
-//  COPYRIGHT.....: Copyright (C) 1999-2018 Alexey Podrezov
-//  VERSION.......: 3.1
+//  COPYRIGHT.....: Copyright (C) 1999-2022 Alexey Podrezov
+//  VERSION.......: 3.2
 //  DESCRIPTION...: Cassette Interface Emulation utility for MSX computers
 //  NOTES.........: Encodes/decodes files to be transfered through MSX cassette interface
 //  HISTORY.......:
 //  PERSON          DATE         COMMENT
-//  --------        ----------   -----------------------------------------------
-//  Podrezov        07/09/1999   Initial version created
-//  Podrezov        26/08/2005   Sources ported to Visual Studio .NET
-//  Podrezov        28/08/2005   Added support for 16 bit, stereo, 44 kHz
-//  Podrezov        29/08/2005   Modified ROM loaders
-//  Podrezov        30/08/2005   Added sound file playback
-//  Podrezov        05/09/2005   Increased parts number to 15, multifile loader modified
-//  Podrezov        12/09/2005   Fixed detokenized Basic file loading bug in multifile loader routine
-//  Podrezov        25/09/2005   Added preloader for BINs, ROMs
-//  Podrezov        26/09/2005   Modified and recompiled ROM loaders, created BIN2INC utility
-//  Podrezov        29/09/2005   Added preloader for multi-file ROMs
-//  Podrezov        03/10/2005   Wrote WAV converter from CD to RD quality
-//  Podrezov        14/03/2008   Sources ported to Visual Studio 2005
-//  Podrezov        17/03/2008   Added MP3 conversion capability, added colors for messages
-//  Podrezov        19/03/2008   Disabled signal level question (now it always is 100), fixed waveform of CD quality WAV file
-//  Podrezov        21/03/2008   Added option for normal and inverted waveforms for different MP3 players
-//  Podrezov        22/03/2008   Fixed a bug in WAV file length calculation when only binary files are encoded
-//  Podrezov        23/03/2008   Added copyright message to WAV files, added wrong CR+LF check for input ASCII files
-//  Podrezov        26/03/2008   Re-wrote all ROM loaders, created single BIN file loader, added CRC check
-//  Podrezov        28/03/2008   Added 3000 baud MSX cassette I/O speed support!
-//  Podrezov        05/08/2008   Added missing detokenized file encoding code in single file encoding routine
-//  Podrezov        29/10/2008   Fixed a bug in 32kb ROM loading routine, now all such ROMs should start normally
-//	Podrezov		08/02/2016   Changed the second loader for 32kb files so it does not reset a computer. Added new loader that resets the computer and changed /r option to be used with it, removed decoding and playback functions
-//	Podrezov		13/02/2016   Rewrote 8-16kb ROM loaders to work correctly with files that start from different addresses, introduced the final 32kb loader with reset and fixed the bug in the 32kb loader without reset
-//	Podrezov		14/02/2016   Added 49kb ROM loaders and handling routines, fixed MP3 file waiting routine
-//	Podrezov		18/02/2016   Fixed bug in 3rd 49kb loader routine (with reset)
-//	Podrezov		23/02/2016   Refined file recognition routine to exclude files that can't be loaded, added rudimentary detection of ROM files with mappers
-//  Podrezov		07/03/2016   Fixed the 49kb final loader, tested on numerous MSXs (1,2,2+), corrected patching routine for multi file loader (after its optimization)
-//	Podrezov		05/05/2016   Fixed the 49kb final non-reset loader, now BIOS is enabled before passing control to the ROM
-//	Podrezov		06/05/2016   Added a patcher for 3 erased bytes at 8000H into the loaders with reset functionality
-//	Podrezov		07/05/2016   Increased the max amount of loaded files to 20
-//	Podrezov		08/05/2016   The data in loaded BIN files is also moved to the destination address from the end to avoid corruption
-//	Podrezov		09/05/2016   Wrong input does not cause the program to exit with error any more, only correct input is accepted; BIN loaders now start from 8200h to load 24kb BIN files
-//	Podrezov		21/05/2016   Fixed missing CCF opcode before ADC and SBC operations, the set flag could affect the operations
-//	Podrezov		04/03/2018   Fixed the 2400 baud file generation so that it is also accepted by emulators; adjusted the length of headers, verified the highest baud rate to be around 3000 baud
+//  --------	----------   -----------------------------------------------
+//  Podrezov	07/09/1999   Initial version created
+//  Podrezov	26/08/2005   Sources ported to Visual Studio .NET
+//  Podrezov	28/08/2005   Added support for 16 bit, stereo, 44 kHz
+//  Podrezov	29/08/2005   Modified ROM loaders
+//  Podrezov	30/08/2005   Added sound file playback
+//  Podrezov	05/09/2005   Increased parts number to 15, multifile loader modified
+//  Podrezov	12/09/2005   Fixed detokenized Basic file loading bug in multifile loader routine
+//  Podrezov	25/09/2005   Added preloader for BINs, ROMs
+//  Podrezov	26/09/2005   Modified and recompiled ROM loaders, created BIN2INC utility
+//  Podrezov	29/09/2005   Added preloader for multi-file ROMs
+//  Podrezov	03/10/2005   Wrote WAV converter from CD to RD quality
+//  Podrezov	14/03/2008   Sources ported to Visual Studio 2005
+//  Podrezov	17/03/2008   Added MP3 conversion capability, added colors for messages
+//  Podrezov	19/03/2008   Disabled signal level question (now it always is 100), fixed waveform of CD quality WAV file
+//  Podrezov	21/03/2008   Added option for normal and inverted waveforms for different MP3 players
+//  Podrezov	22/03/2008   Fixed a bug in WAV file length calculation when only binary files are encoded
+//  Podrezov	23/03/2008   Added copyright message to WAV files, added wrong CR+LF check for input ASCII files
+//  Podrezov	26/03/2008   Re-wrote all ROM loaders, created single BIN file loader, added CRC check
+//  Podrezov	28/03/2008   Added 3000 baud MSX cassette I/O speed support!
+//  Podrezov	05/08/2008   Added missing detokenized file encoding code in single file encoding routine
+//  Podrezov	29/10/2008   Fixed a bug in 32kb ROM loading routine, now all such ROMs should start normally
+//  Podrezov	08/02/2016   Changed the second loader for 32kb files so it does not reset a computer. Added new loader that resets the computer and changed /r option to be used with it, removed decoding and playback functions
+//  Podrezov	13/02/2016   Rewrote 8-16kb ROM loaders to work correctly with files that start from different addresses, introduced the final 32kb loader with reset and fixed the bug in the 32kb loader without reset
+//  Podrezov	14/02/2016   Added 49kb ROM loaders and handling routines, fixed MP3 file waiting routine
+//  Podrezov	18/02/2016   Fixed bug in 3rd 49kb loader routine (with reset)
+//  Podrezov	23/02/2016   Refined file recognition routine to exclude files that can't be loaded, added rudimentary detection of ROM files with mappers
+//  Podrezov	07/03/2016   Fixed the 49kb final loader, tested on numerous MSXs (1,2,2+), corrected patching routine for multi file loader (after its optimization)
+//  Podrezov	05/05/2016   Fixed the 49kb final non-reset loader, now BIOS is enabled before passing control to the ROM
+//  Podrezov	06/05/2016   Added a patcher for 3 erased bytes at 8000H into the loaders with reset functionality
+//  Podrezov	07/05/2016   Increased the max amount of loaded files to 20
+//  Podrezov	08/05/2016   The data in loaded BIN files is also moved to the destination address from the end to avoid corruption
+//  Podrezov	09/05/2016   Wrong input does not cause the program to exit with error any more, only correct input is accepted; BIN loaders now start from 8200h to load 24kb BIN files
+//  Podrezov	21/05/2016   Fixed missing CCF opcode before ADC and SBC operations, the set flag could affect the operations
+//  Podrezov	04/03/2018   Fixed the 2400 baud file generation so that it is also accepted by emulators; adjusted the length of headers, verified the highest baud rate to be around 3000 baud
+//  Podrezov	14.08.2022   Fixed the patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
 //******************************************************************************
 
 #pragma once
