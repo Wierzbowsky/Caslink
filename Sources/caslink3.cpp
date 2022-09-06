@@ -1,7 +1,7 @@
 //******************************************************************************
 //  FILE..........: CASLINK3.C
 //  COPYRIGHT.....: Copyright (C) 1999-2022 Alexey Podrezov
-//  VERSION.......: 3.2
+//  VERSION.......: 3.3
 //  DESCRIPTION...: Cassette Interface Emulation utility for MSX computers
 //  NOTES.........: Encodes/decodes files to be transfered through MSX cassette interface
 //  HISTORY.......:
@@ -42,6 +42,8 @@
 //  Podrezov	21/05/2016   Fixed missing CCF opcode before ADC and SBC operations, the set flag could affect the operations
 //  Podrezov	04/03/2018   Fixed the 2400 baud file generation so that it is also accepted by emulators; adjusted the length of headers, verified the highest baud rate to be around 3000 baud
 //  Podrezov	14.08.2022   Fixed the patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
+//  Podrezov	05.09.2022   Fixed the file filter routine that was rejecting BINs larger than 17kb
+//  Podrezov	05.09.2022   Fixed the LENGTHCORRECTION value to adjust the file size to the WAV data block size
 //******************************************************************************
 
 #pragma once
@@ -283,7 +285,7 @@ void EncodeSingleFile(void)
 		FileOffset = 1;
 		MoreExtraBytes = 0;
 	}
-	else if ((unsigned char)InputMemPointer[0] == 0xfe && InputFileLength <= 17000L)
+	else if ((unsigned char)InputMemPointer[0] == 0xfe && InputFileLength <= 24576L)
 	{
 		FileType = 2;			// BIN program
 		FileOffset = 7;
@@ -422,7 +424,7 @@ void EncodeSingleFile(void)
 	WavHeader.NumChannels = (WORD) 1;			// mono
 	WavHeader.BitsPerSample = (WORD) 8;			// 8 bit
 	WavHeader.SamplesPerSec = (DWORD)WavSampleRate;
-	WavHeader.BytesPerSec = (DWORD)((DWORD)WavSampleRate * (DWORD)(WavHeader.BitsPerSample / 8) * (DWORD)WavHeader.NumChannels);
+	WavHeader.BytesPerSec = (DWORD)(((DWORD)WavSampleRate * (DWORD)(WavHeader.BitsPerSample) * (DWORD)WavHeader.NumChannels)) / 8;
 	WavHeader.FormatSize = (DWORD)(sizeof(WavHeader.FormatTag) + sizeof(WavHeader.NumChannels) + sizeof(WavHeader.BitsPerSample) +
    	sizeof(WavHeader.SamplesPerSec) + sizeof(WavHeader.BytesPerSec) + sizeof(WavHeader.BlkAllign));
 	WavHeader.PureSampleLength = 0;
@@ -502,7 +504,7 @@ void EncodeSingleFile(void)
 		(unsigned char)ROM49KLoader2[i + 0x15] = (unsigned char)NameBuffer[i];	// 49k ROM loader 2
 		(unsigned char)BINROMPreLoader[i + 0x0e] = (unsigned char)NameBuffer[i];	// Preloader for BIN/ROM files
 	}
-	if ((FileType == 2 || FileType == 3) && InputFileLength < 17000L)
+	if ((FileType == 2 || FileType == 3) && InputFileLength <= 24576L)
 	{
 		for (i = 0; i < 6; i++) (unsigned char)BINROMPreLoader[i + 0x15] = ' ';	// Erase 'part 1' from command line in case only one file is encoded
 	}
@@ -1360,7 +1362,7 @@ void EncodeMultipleFiles(int k)
 	WavHeader.NumChannels = (WORD) 1; // mono always
 	WavHeader.BitsPerSample = (WORD) 8;	// 8 bit always
 	WavHeader.SamplesPerSec = (DWORD)WavSampleRate;
-	WavHeader.BytesPerSec = (DWORD)((DWORD)WavSampleRate * (DWORD)(WavHeader.BitsPerSample / 8) * (DWORD)WavHeader.NumChannels);
+	WavHeader.BytesPerSec = (DWORD)(((DWORD)WavSampleRate * (DWORD)(WavHeader.BitsPerSample) * (DWORD)WavHeader.NumChannels)) / 8;
 	WavHeader.FormatSize = (DWORD)(sizeof(WavHeader.FormatTag) + sizeof(WavHeader.NumChannels) + sizeof(WavHeader.BitsPerSample) +
    	sizeof(WavHeader.SamplesPerSec) + sizeof(WavHeader.BytesPerSec) + sizeof(WavHeader.BlkAllign));
 	WavHeader.PureSampleLength = 0;

@@ -1,7 +1,7 @@
 //******************************************************************************
 //  FILE..........: CASLINK3.H
 //  COPYRIGHT.....: Copyright (C) 1999-2022 Alexey Podrezov
-//  VERSION.......: 3.2
+//  VERSION.......: 3.3
 //  DESCRIPTION...: Cassette Interface Emulation utility for MSX computers
 //  NOTES.........: Encodes/decodes files to be transfered through MSX cassette interface
 //******************************************************************************
@@ -23,7 +23,7 @@
 #define MINENCINPUTFILELENGTH	5L
 #define MAXSENCINPUTFILELENGTH	50000L
 #define MAXMENCINPUTFILELENGTH	25000L
-#define LENGTHCORRECTION		25
+#define LENGTHCORRECTION		255
 #define USERBUFFERLENGTH		1024
 #define MAXSIGNALLEVEL			100
 
@@ -275,7 +275,7 @@ static unsigned char	ROM49KLoader3Rst[376] = {
 
 // Messages
 static char	szCaption[]="The CasLink Project. Created by Alexey Podrezov, 1999-2022";
-static char	szTitle1[]="\nCasLink Data-to-Audio Encoder Utility. Version 3.2\nCopyright (c) 1999-2022 Alexey Podrezov. All rights reserved.\n";
+static char	szTitle1[]="\nCasLink Data-to-Audio Encoder Utility. Version 3.3\nCopyright (c) 1999-2022 Alexey Podrezov. All rights reserved.\n";
 static char szTitle2[]="\n This utility encodes files that are transfered via the MSX cassette\n interface with the help of most common sound hardware:\n mobile phone, PC sound card, CD or MP3 player.\n\n Supported formats: BAS (tokenized/detokenized), SCR (screenshots)\n                    BIN (8/16/24 kb), ROM (8/16/24/32/49 kb)\n";
 
 static char	FileFormat[][50] = {
@@ -304,8 +304,8 @@ static char szOverwrWarning[]=	"\n WARNING: File with this name already exists. 
 static char szConvertToCD[]="\n Converting WAV file into 16 bit/stereo/44 kHz format...\n";
 static char szNoLameFiles[]="\n WARNING: Lame encoder is not found, MP3 file will not be created...\n";
 static char szCreateMP3[]=	" Creating MP3 output, this may take a while. Please wait...\n";
-static char szWavCopyrMsg[]=" *** This WAV file was produced by CasLink3 v3.2 *** ";
-static char BatCmdLine[]=	"lame.exe -q 0 -b %d -k -m m --cbr --noath --tt \"CasLink3: %s (MSX %d baud) %d kbps\" --tc \"This MP3 file was produced by CasLink3 v3.2\" %s.wav %s.mp3";
+static char szWavCopyrMsg[]=" *** This WAV file was produced by CasLink3 v3.3 *** ";
+static char BatCmdLine[]=	"lame.exe -q 0 -b %d -k -m m --cbr --noath --tt \"CasLink3: %s (MSX %d baud) %d kbps\" --tc \"This MP3 file was produced by CasLink3 v3.3\" %s.wav %s.mp3";
 
 // Error messages
 static char	ErrorList[][80] = {
