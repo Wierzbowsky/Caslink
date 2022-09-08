@@ -11,6 +11,10 @@ New features in Version 3.3
 
 2. Fixed the LENGTHCORRECTION value to adjust the file's size to the WAV data block's size
 
+3. Fixed the BIN chunk size for CRC calculation in both main code and single/multifile BIN loaders (thanks to Romsey)
+
+4. Converted all MAC sources to ASM to be used with AS80 assembler by Frank Kingswood
+
 
 New features in Version 3.2
 ---------------------------
