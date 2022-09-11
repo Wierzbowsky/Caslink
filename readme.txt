@@ -35,7 +35,7 @@ games on their MSX computers again with the help of Caslink.
 
 The primary location of CasLink project pages and other projects of Alexey Podrezov:
 
-http://www.podrezov.com/
+https://www.podrezov.com/
 
 
 2. Caslink Features
@@ -116,32 +116,44 @@ The Caslink project contains the following files:
  - Caslink3.h     (source code, header file)
  - l32k1.bin      (compiled 32k ROM loader, part 1)
  - l32k1.mac      (32k ROM loader source, part 1)
+ - l32k1.asm      (32k ROM loader source, part 1, for AS80 assembler)
  - l32k2.bin      (compiled 32k ROM loader, part 2)
  - l32k2.mac      (32k ROM loader source, part 2)
+ - l32k2.asm      (32k ROM loader source, part 2, for AS80 assembler)
  - l32k2rst.bin   (compiled 32k ROM loader with reset, part 2)
  - l32k2rst.mac   (32k ROM loader with reset source, part 2)
+ - l32k2rst.asm   (32k ROM loader with reset source, part 2, for AS80 assembler)
  - l49k1.bin      (compiled 49k ROM loader, part 1)
  - l49k1.mac      (49k ROM loader source, part 1)
+ - l49k1.asm      (49k ROM loader source, part 1, for AS80 assembler)
  - l49k2.bin      (compiled 49k ROM loader, part 2)
  - l49k2.mac      (49k ROM loader source, part 2)
+ - l49k2.asm      (49k ROM loader source, part 2, for AS80 assembler)
  - l49k3.bin      (compiled 49k ROM loader, part 3)
  - l49k3.mac      (49k ROM loader source, part 3)
+ - l49k3.asm      (49k ROM loader source, part 3, for AS80 assembler)
  - l49k2rst.bin   (compiled 49k ROM loader with reset, part 3)
  - l49k2rst.mac   (49k ROM loader with reset source, part 3)
+ - l49k2rst.asm   (49k ROM loader with reset source, part 3, for AS80 assembler)
  - mulfload.bin   (compiled multi-file loader)
  - mulfload.mac   (multi-file loader source)
+ - mulfload.asm   (multi-file loader source, for AS80 assembler)
  - preload.bin    (compiled multi-file preloader)
  - preload.mac    (multi-file preloader source)
+ - preload.asm    (multi-file preloader source, for AS80 assembler)
  - rloader.bin    (compiled ROM loader)
  - rloader.mac    (ROM loader source)
+ - rloader.asm    (ROM loader source, for AS80 assembler)
  - rloadrst.bin   (compiled ROM loader with reset)
  - rloadrst.mac   (ROM loader with reset source)
+ - rloadrst.asm   (ROM loader with reset source, for AS80 assembler)
  - binload.bin    (compiled single file loader)
  - binload.mac    (single file loader source)
+ - binload.asm    (single file loader source, for AS80 assembler)
  - readme.txt     (this readme file)
  - disclaimer.txt (disclaimer file)
  - whats.new      (list of new features)
- - bin2inc.py     (utility to convert .bin files into .inc files, requires Python)
+ - bin2inc.py     (utility to convert .bin files into .inc files, requires Python interpreter)
 
 To be able to use the Python utility that converts .bin files (loaders) into hex byte arrays for the caslink.h
 header file you need to install the Python programming environment. Go to www.python.org for the installer.
@@ -458,6 +470,10 @@ Below is the history of changes made in the CasLink projects by its developer:
  Podrezov   04/03/2018   Fixed the 2400 baud file generation so that it is also accepted by emulators; adjusted the length of headers,
                          verified the highest baud rate to be around 3000 baud
  Podrezov   14/08/2022   Fixed the patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
+ Podrezov   05.09.2022   Fixed the file filter routine that was rejecting BINs larger than 17kb
+ Podrezov   05.09.2022   Fixed the LENGTHCORRECTION value to adjust the file size to the WAV data block size
+ Podrezov   07.09.2022   Fixed the BIN chunk size for CRC calculation in both main code and single/multifile BIN loaders (thanks to Romsey)
+ Podrezov   07.09.2022   Converted all MAC sources to ASM to be used with AS80 assembler by Frank Kingswood
 
 
 8. Copyrights
@@ -501,6 +517,7 @@ CasLink project:
  Ahti Soilamaa
  Saku Taipale (STT)
  Walter van Niftrik
+ Duncan (Romsey)
 
 
 10. Contact Information and Donations
@@ -508,9 +525,10 @@ CasLink project:
 If you wish to contact the author of Caslink projects - Alexey Podrezov, please feel free to send a message to
 the following e-mail address:
 
- alexey.podrezov@gmail.com
+ alexey.podrezov (at) gmail.com
+ wierzbowsky (at) rbsc.su
 
-If you would like to make a small donation as appreciation of the author's effort, please use the above e-mail
+If you would like to make a small donation as appreciation of the author's effort, please use the first e-mail
 address to send a few bucks via PayPal.
 
 ========================================================================

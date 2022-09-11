@@ -20,3 +20,16 @@ mulfload.mac	- loader's source code
 preload.mac	- loader's source code
 rloader.mac	- loader's source code
 rloadrst.mac	- loader's source code
+
+binload.asm	- loader's source code, for AS80 assembler
+l32k1.asm	- loader's source code, for AS80 assembler
+l32k2.asm	- loader's source code, for AS80 assembler
+l32k2rst.asm	- loader's source code, for AS80 assembler
+l49k1.asm	- loader's source code, for AS80 assembler
+l49k2.asm	- loader's source code, for AS80 assembler
+l49k3.asm	- loader's source code, for AS80 assembler
+l49k3rst.asm	- loader's source code, for AS80 assembler
+mulfload.asm	- loader's source code, for AS80 assembler
+preload.asm	- loader's source code, for AS80 assembler
+rloader.asm	- loader's source code, for AS80 assembler
+rloadrst.asm	- loader's source code, for AS80 assembler
