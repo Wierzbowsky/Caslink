@@ -35,7 +35,8 @@ games on their MSX computers again with the help of Caslink.
 
 The primary location of CasLink project pages and other projects of Alexey Podrezov:
 
-https://www.podrezov.com/
+https://podrezov.com/
+http://www.podrezov.com/
 
 
 2. Caslink Features
