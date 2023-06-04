@@ -1,7 +1,31 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.3
-                Copyright (c) 1999-2022 Alexey Podrezov
+                   The CasLink Project: CasLink v4.0
+                Copyright (c) 1999-2023 Alexey Podrezov
 ========================================================================
+
+
+New features in Version 4.0
+---------------------------
+
+1. Massive rework of 8-49kb ROM loaders and BIN/ROM preloader:
+
+  a. It's now possible to load 8-49kb ROMs into MSX1 computers with RAM in slot 0 as long as there's a RAM expansion is in slot 1, 2 or 3
+
+  b. It's now possible to load 8-49kb ROMs into MSX1 computers with less than 64kb of RAM as long as there's a RAM expansion is in slot 1, 2 or 3
+
+  c. It's now possible to load 8-49kb ROMs into Daewoo CPC computers as long as there's a RAM expansion is in slot 1, 2 or 3
+
+  d. In case there's too little RAM or a RAM expansion is missing, there will be an error message: "NO RAM!"
+
+2. The maximum supported BIN file size has been increased to 24712 bytes
+
+3. The BIN loader has been relocated to address 0x8100 (from 0x8200) to load larger files
+
+4. The preloader has been reworked and relocated to address 0xC100 (from 0x9000) to better detect RAM anomalies
+
+5. Integration into the SVI-CAS device by Romsey - it's possible to load games with or without reset
+
+6. All MAC sources have been removed, use the AS80 assembler by Frank Kingswood to compile .ASM files
 
 
 New features in Version 3.3

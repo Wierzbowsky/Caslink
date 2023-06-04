@@ -1,15 +1,15 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.3
-                Copyright (C) 1999-2022 Alexey Podrezov
+                   The CasLink Project: CasLink v4.0
+                Copyright (C) 1999-2023 Alexey Podrezov
 ========================================================================
 
 Disclaimer
 ----------
 
-The CasLink3 project executable file and its source code is 
+The CasLink4 project executable file and its source code is 
 provided AS IS with no warranty whatsoever.
 
-You are using this program solely on your own risk. The CasLink3 
+You are using this program solely on your own risk. The CasLink4 
 author (Alexey Podrezov) is not responsible for any damages that 
 might result from the usage of this program.
 

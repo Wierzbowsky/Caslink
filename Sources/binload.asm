@@ -1,7 +1,7 @@
-; SINGLE BIN FILE LOADER (FOR CASLINK3 PROJECT)
-; COPYRIGHT (C) 1999-2022 ALEXEY PODREZOV
+; SINGLE BIN FILE LOADER (FOR CASLINK4 PROJECT)
+; COPYRIGHT (C) 1999-2023 ALEXEY PODREZOV
 
-	org	#8200
+	org	#8100
 
 start:	jp	start1
 
@@ -11,7 +11,7 @@ execa:	dw	0
 crc:	db	0
 
 
-caserr:	db	"[CasLink3] Loading failed: CRC ERROR!",0
+caserr:	db	"[CasLink4] Loading failed: CRC ERROR!",0
 
 start1:	di
 	ld	hl,(starta)

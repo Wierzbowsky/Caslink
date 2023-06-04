@@ -1,5 +1,5 @@
-; BLOAD MODULE FOR 49KB ROMS PART 2 (FOR CASLINK3 PROJECT)
-; COPYRIGHT (C) 1999-2022 ALEXEY PODREZOV
+; BLOAD MODULE FOR 49KB ROMS PART 2 (FOR CASLINK4 PROJECT)
+; COPYRIGHT (C) 1999-2023 ALEXEY PODREZOV
 
 	org	#9000
 
@@ -18,9 +18,13 @@ loadcmd:db	#1e
 	db	",r"
 	db	13,0
 
-caslstr:db	"[CasLink3] Loading file, please wait...",0
+caslstr:db	"[CasLink4] Loading file, please wait...",0
 
-caserr:	db	"[CasLink3] Loading failed: CRC ERROR!",0
+caserr:	db	"[CasLink4] Loading failed: CRC ERROR!",0
+ramerr:	db	"NO RAM!   "
+expand:	db	0
+primsl:	db	0
+secsl:	db	0
 
 start1:	di
 	ld	hl,(starta)
@@ -110,6 +114,25 @@ start6:	ld	a,(de)
 	call	#00c6		; set next position
 	jr	start6
 
+NoRam:
+	ld	hl,ramerr
+	ld	de,caserr+27
+	ld	bc,10		; change error message to "NO RAM!"
+	ldir
+	jp	crcerr
+
+CheckRam:
+	ld	a,b
+	out	(#a8),a		; set supposed mapper page in slot at 0x4000
+	ld	a,c
+	ld	(#ffff),a	; set supposed mapper page in slot at 0x4000
+	ld	a,#42
+	ld	hl,#4000
+	ld	(hl),a
+	ld	a,(hl)
+	cp	#42
+	ret
+
 start7:	ld	hl,#0103
 	call	#00c6		; set cursor position to 1:3
 	call	#0156		; clears keyboard buffer
@@ -125,6 +148,85 @@ start7:	ld	hl,#0103
 	ld	(#f3f8),hl
 
 loadrom:di
+	ld	a,(#fcc1)
+	ld	(expand),a	; save expansion flag
+	ld	a,(#ffff)
+	cpl
+	ld	(secsl),a	; save secondary slot configuration
+	in	a,(#a8)
+	ld	(primsl),a	; save primary slot configuration
+	and	#f0
+	cp	#10		; machines with 16kb or less RAM with expansion in slot 1
+	jr	z,start50
+	cp	#20		; machines with 16kb or less RAM with expansion in slot 2
+	jr	z,start50
+	cp	#30		; machines with 16kb or less RAM with expansion in slot 3
+	jr	z,start50
+	or	a		; RAM in slot 0?
+	jp	nz,start5c
+
+start50:
+	ld	a,(primsl)
+	set	2,a
+	res	3,a
+	ld	b,a
+	ld	a,(secsl)
+	set	2,a
+	res	3,a
+	ld	c,a
+	call	CheckRam	; look for RAM expansion in slot 1
+	jr	z,start5a
+	ld	a,(primsl)
+	res	2,a
+	set	3,a
+	ld	b,a
+	ld	a,(secsl)
+	res	2,a
+	set	3,a
+	ld	c,a
+	call	CheckRam	; look for RAM expansion in slot 2
+	jr	z,start5a
+	ld	a,(primsl)
+	set	2,a
+	set	3,a
+	ld	b,a
+	ld	a,(secsl)
+	set	2,a
+	set	3,a
+	ld	c,a
+	call	CheckRam	; look for RAM expansion in slot 3
+	jp	nz,NoRam
+
+start5a:
+	ld	a,b
+	out	(#a8),a		; set supposed mapper page in slot at 0x4000
+	ld	a,c
+	ld	(#ffff),a	; set supposed mapper page in slot at 0x4000
+start5b:
+	ld	hl,patch1
+	ld	(hl),#3e	; ld a,n
+	inc	hl
+	ld	(hl),c		; number for expansion slot
+	inc	hl
+	ld	(hl),0		; nop
+	ld	hl,patch2
+	ld	(hl),#3e	; ld a,n
+	inc	hl
+	ld	(hl),b		; number for primary slot
+	inc	hl
+	ld	(hl),0		; nop
+	ld	hl,patch3
+	ld	(hl),#3e	; ld a,n
+	inc	hl
+	ld	a,(primsl)
+	ld	(hl),a		; number for primary slot
+	ld	hl,patch4
+	ld	(hl),#3e	; ld a,n
+	inc	hl
+	ld	a,(secsl)
+	ld	(hl),a		; number for primary slot
+
+start5c:
 	ld	a,(#ffff)
 	cpl
 	push	af
@@ -136,7 +238,7 @@ loadrom:di
 	rrca
 	rrca
 	rrca
-	and	15
+patch1:	and	15
 	or	b
 	ld	(#ffff),a
 	in	a,(#a8)
@@ -147,7 +249,7 @@ loadrom:di
 	rrca
 	rrca
 	rrca
-	and	15
+patch2:	and	15
 	or	b
 	out	(#a8),a
 
@@ -163,8 +265,12 @@ loadrom:di
 	ld	de,(starta)
 	ldir
 	pop	af
+patch3:	nop
+	nop
 	out	(#a8),a
 	pop	af
+patch4:	nop
+	nop
 	ld	(#ffff),a
 	ei
 	ret

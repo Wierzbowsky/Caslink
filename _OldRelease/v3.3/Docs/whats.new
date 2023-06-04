@@ -1,0 +1,56 @@
+========================================================================
+                   The CasLink Project: CasLink v3.3
+                Copyright (c) 1999-2022 Alexey Podrezov
+========================================================================
+
+
+New features in Version 3.3
+---------------------------
+
+1. Fixed the file filter routine that was rejecting BINs larger than 17kb
+
+2. Fixed the LENGTHCORRECTION value to adjust the file's size to the WAV data block's size
+
+3. Fixed the BIN chunk size for CRC calculation in both main code and single/multifile BIN loaders (thanks to Romsey)
+
+4. Converted all MAC sources to ASM to be used with AS80 assembler by Frank Kingswood
+
+
+New features in Version 3.2
+---------------------------
+
+1. Bugfix for patcher routine in 32kb and 49kb loaders with reset (patcher call address left on the stack)
+
+
+New features in Version 3.1
+---------------------------
+
+1. The 2400 baud file generation is fixed, now the frequencies are correct
+
+2. The 3600 baud rate was discovered to be quite inaccurate. In most of cases the speed varies from 2880 or 3000 baud
+
+
+New features in Version 3.0
+---------------------------
+
+1. The /r option has been introduced - it allows to select the option to reset a computer after loading a ROM image. If
+   some game does not work with /e option, it may work with /r option
+
+2. The ROM loading routines have been improved to handle files starting from various tricky addresses
+
+3. It is now possible to load 49kb ROM images into MSX. Such ROMs are divided in 3 parts and are loaded from address 0000h.
+   Some of these ROMs work with /r option, some with /e option and a few work with both options
+
+4. Improved file format recognition routines, added a simple check for mapper presence in ROM files larger that 32kb
+
+5. Now it's possible to encode 20 files into the WAV/MP3, this was done for games with large amount of files
+
+6. The single BIN file and multi-file loaders have been significantly improved. Now action is taken to avoid corruption during
+   moving of the loaded binary code to its destination. The code is moved from the end of loaded data if necessary
+
+7. The 24kb BIN files are now correctly loaded into RAM. The BIN loaders' code have been moved from 9000h to 8200h to save space
+   and allow the 24kb file to be fully loaded
+
+NOTE: The option to read audio files and decode the audio stream into binaries has been removed from the code. Caslink will no
+      longer be presented as bi-directional application. From now on the sole purpose of Caslink3 is to transfer files to MSX
+      computers

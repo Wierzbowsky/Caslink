@@ -1,16 +1,16 @@
 ========================================================================
-                   The CasLink Project: CasLink v3.3
-                Copyright (c) 1999-2022 Alexey Podrezov
+                   The CasLink Project: CasLink v4.0
+                Copyright (c) 1999-2023 Alexey Podrezov
 ========================================================================
 
 Contents
 --------
 
  1. Overview
- 2. Caslink3 Features
- 3. Caslink3 Files
- 4. Caslink3 Command Line Options
- 5. CasLink/Caslink3 Cable
+ 2. Caslink4 Features
+ 3. Caslink4 Files
+ 4. Caslink4 Command Line Options
+ 5. CasLink/Caslink4 Cable
  6. Tips and Tricks
  7. Project History
  8. Copyrights
@@ -23,7 +23,7 @@ Contents
 
 The main goal of CasLink projects is to allow loading programs and games into MSX computers from different 
 audio devices. All MSX computers are equipped with a cassette recorder interface that was designed to save
-and load software from tapes. What CasLink/Caslink3 does is basically simulating this interface.
+and load software from tapes. What CasLink/Caslink4 does is basically simulating this interface.
 
 Caslink allows to transform MSX binary and ASCII files into WAV or MP3 files that can be played back to MSX
 using a PC sound card, a CD or MP3 player or even a mobile phone through a simple audio cable. See the cable
@@ -33,10 +33,18 @@ CasLink was primarily created for MSX users who don't have floppy disk drives in
 be also a relief for those, whose disk drives are broken. Those MSX users will be able to play their favorite
 games on their MSX computers again with the help of Caslink.
 
+Since version 4.0 CasLink allows to load ROM files into Daewoo MSX computers as well as into MSX1 computers
+with RAM in slot 0 (or RAM split between subslots in expanded slot 0) as long as any RAM expansion cartridge
+is present in slots 1, 2 or 3. This is also true for other computers with less than 64kb of RAM.
+
 The primary location of CasLink project pages and other projects of Alexey Podrezov:
 
-https://podrezov.com/
-http://www.podrezov.com/
+ https://podrezov.com/
+
+In 2023 CasLink has been implemented into the SVI-CAS, the device created by Romsey to load software into many
+different vintage computers, including MSX:
+
+ https://www.msx.org/forum/msx-talk/hardware/svi-cas-image-player-initial-announcement
 
 
 2. Caslink Features
@@ -49,7 +57,7 @@ Caslink supports encoding of the following MSX formats:
   ROM - pure images of ROM cartridges
   SCR - screenshots (BIN files with startup code to transfer contents to VRAM)
 
-Caslink3 supports encoding of the following BIN and ROM formats:
+Caslink4 supports encoding of the following BIN and ROM formats:
 
   BIN - 8/16/24 kb
   ROM - 8/16/24/32/49 kb
@@ -85,7 +93,7 @@ The following MSX CAS interface speeds are supported:
  - 2400 baud
  - 3000 baud (may not work on certain MSX hardware)
 
-The really new thing in Caslink3 project is the ability to create optimized MP3 files for different devices:
+The really new thing in Caslink4 project is the ability to create optimized MP3 files for different devices:
 PC sound card, CD player and MP3 players from major various manufacturers: Creative, Apple, various mobile
 phones and so on. During testing it was noticed that Creative and Apple MP3 players require different waveform
 to be created, so Caslink asks to specify normal or inverted waveform in order to create the appropriate output
@@ -112,44 +120,32 @@ Caslink was tested with the following audio devices:
 
 The Caslink project contains the following files:
 
- - Caslink3.exe   (the main executable file)
- - Caslink3.cpp   (source code, main C code)
- - Caslink3.h     (source code, header file)
+ - Caslink4.exe   (the main executable file)
+ - Caslink4.cpp   (source code, main C code)
+ - Caslink4.h     (source code, header file)
  - l32k1.bin      (compiled 32k ROM loader, part 1)
- - l32k1.mac      (32k ROM loader source, part 1)
  - l32k1.asm      (32k ROM loader source, part 1, for AS80 assembler)
  - l32k2.bin      (compiled 32k ROM loader, part 2)
- - l32k2.mac      (32k ROM loader source, part 2)
  - l32k2.asm      (32k ROM loader source, part 2, for AS80 assembler)
  - l32k2rst.bin   (compiled 32k ROM loader with reset, part 2)
- - l32k2rst.mac   (32k ROM loader with reset source, part 2)
  - l32k2rst.asm   (32k ROM loader with reset source, part 2, for AS80 assembler)
  - l49k1.bin      (compiled 49k ROM loader, part 1)
- - l49k1.mac      (49k ROM loader source, part 1)
  - l49k1.asm      (49k ROM loader source, part 1, for AS80 assembler)
  - l49k2.bin      (compiled 49k ROM loader, part 2)
- - l49k2.mac      (49k ROM loader source, part 2)
  - l49k2.asm      (49k ROM loader source, part 2, for AS80 assembler)
  - l49k3.bin      (compiled 49k ROM loader, part 3)
- - l49k3.mac      (49k ROM loader source, part 3)
  - l49k3.asm      (49k ROM loader source, part 3, for AS80 assembler)
  - l49k2rst.bin   (compiled 49k ROM loader with reset, part 3)
- - l49k2rst.mac   (49k ROM loader with reset source, part 3)
  - l49k2rst.asm   (49k ROM loader with reset source, part 3, for AS80 assembler)
  - mulfload.bin   (compiled multi-file loader)
- - mulfload.mac   (multi-file loader source)
  - mulfload.asm   (multi-file loader source, for AS80 assembler)
  - preload.bin    (compiled multi-file preloader)
- - preload.mac    (multi-file preloader source)
  - preload.asm    (multi-file preloader source, for AS80 assembler)
  - rloader.bin    (compiled ROM loader)
- - rloader.mac    (ROM loader source)
  - rloader.asm    (ROM loader source, for AS80 assembler)
  - rloadrst.bin   (compiled ROM loader with reset)
- - rloadrst.mac   (ROM loader with reset source)
  - rloadrst.asm   (ROM loader with reset source, for AS80 assembler)
  - binload.bin    (compiled single file loader)
- - binload.mac    (single file loader source)
  - binload.asm    (single file loader source, for AS80 assembler)
  - readme.txt     (this readme file)
  - disclaimer.txt (disclaimer file)
@@ -185,12 +181,12 @@ Microsoft's website, but it is advised to always put it together with Caslink fi
 Caslink is a Windows console application, so it should be started from a command interpeter (CMD.EXE) or
 (better) from a file manager that supports console output. The best one is Far Manager, it is highly recommended:
 
- http://www.farmanager.com/?l=en
+ https://www.farmanager.com/?l=en
 
 If Caslink is run without command line options, it will show the command line option (key) to get help. To get
 help on command line options run Caslink executable as follows:
 
- Caslink3 /?
+ Caslink4 /?
 
 The following command line options are supported:
 
@@ -200,15 +196,15 @@ The following command line options are supported:
 
 Here are some examples of command lines:
 
- Caslink3 /e File1.rom
- Caslink3 /r File1.rom
- Caslink3 /m File1.rom File2.rom
- Caslink3 /m File1.bas File2.rom File3.rom
- Caslink3 /m File1.bas File2.bin File3.bin File4.bin 
+ Caslink4 /e File1.rom
+ Caslink4 /r File1.rom
+ Caslink4 /m File1.rom File2.rom
+ Caslink4 /m File1.bas File2.rom File3.rom
+ Caslink4 /m File1.bas File2.bin File3.bin File4.bin 
 
 Please note that file names should be no longer than 12 bytes (8 bytes name, 3 bytes extension and a "."). Please
 see the Tips and Tricks section to get some tips and tricks on how to encode files of different types. The files
-to be encoded into a WAV or MP3 file should be in the same folder with the Caslink3.exe file.
+to be encoded into a WAV or MP3 file should be in the same folder with the Caslink4.exe file.
 
 After Caslink encodes the needed file into WAV or MP3 file, the only thing you need is to play this file to MSX
 via a simple audio cable (see instructions below). In order to MSX to start receiving the file you need to type
@@ -280,6 +276,11 @@ intact (in case of a basic program). In case of a binary file, the Caslink will 
 uploaded module and show CRC ERROR message if uploading failed. The CRC check is performed if a binary file is
 run.
 
+Since version 4.0 Carnivore2 is able to detect RAM allocation anomalies, for example when a computer has 32kb
+of RAM in slot 0 or when 64kb of RAM is split between two subslots in slot 0. In such an event, the special
+message "NO RAM!" will be showed. This means that in order to load ROMs into such computer a RAM expansion
+cartridge must be inserted into any user slots (1, 2 or 3).
+
 In case you get a "Device I/O Error" message during uploading, try to increase or decrease the volume by 3-5%
 and re-try uploading. Once the volume is set correctly, memorize the settings - it will be easier to set it up
 next time. If you receive this error on files with normal waveforms, try to create a file with inverted
@@ -304,9 +305,15 @@ HTC phone had no trouble with any files, however Samsung phones required a much 
 
 More tips:
 
- - The LAME MP3 encoder files lame.exe and lame_enc.dll should be placed into the same folder with Caslink3.exe file
+ - On computers where a RAM expansion is used to assist CasLink, it's recommended to load games created without the
+   reset option
 
- - The files to be encoded into a WAV or MP3 file should be in the same folder with the Caslink3.exe file
+ - On computers with one or more disk drives loading BIN files larger than 24kb may not be possible even if the
+   second floppy drive is disabled with CTRL key on boot
+
+ - The LAME MP3 encoder files lame.exe and lame_enc.dll should be placed into the same folder with Caslink4.exe file
+
+ - The files to be encoded into a WAV or MP3 file should be in the same folder with the Caslink4.exe file
 
  - It is advised to convert all tokenized Basic programs to detokenized (ASCII) format, so they can be easily
    modified on a PC, the is a utility to do that conversion called LIST.EXE, it is available on some of MSX sites
@@ -314,8 +321,8 @@ More tips:
  - All 8, 16, 24, 32 and 49kb ROM and some BIN files should be uploaded without a Basic loader in front of them,
    here's an example of the command line:
 
-    Caslink3 /e File1.rom
-    Caslink3 /m File1.rom File2.rom
+    Caslink4 /e File1.rom
+    Caslink4 /m File1.rom File2.rom
 
  - When uploading several BIN files, please note that some games require a special Basic loader in order for the
    game to work, so you will need to modify that loader yourself, to make it work with Caslink, here is an example:
@@ -337,9 +344,9 @@ More tips:
     80 LOAD"cas:",R
 
    In this case the "zanac-ex.GA0" file is a Basic program that was run from a disk drive using the RUN command. Both
-   files were converted to ASCII format and encoded by Caslink3 with the following command line:
+   files were converted to ASCII format and encoded by Caslink4 with the following command line:
 
-    Caslink3 /m File1.bas File2.bas File3.bin File4.bin
+    Caslink4 /m File1.bas File2.bas File3.bin File4.bin
 
    where first 2 Basic programs are loaders and the rest are game binaries. So in order for the first Basic program
    to load and start the second Basic program from a cassette interface, we had to change the RUN command into the
@@ -374,7 +381,7 @@ More tips:
    all files in that specific order as the original Basic program loads them. Here's the command line for this
    particular case (the WOODYPOC.BAS is the above shown Basic loader):
 
-    Caslink3 /m WOODYPOC.BAS WOODYPOC.VRP WOODYPOC.GA2 
+    Caslink4 /m WOODYPOC.BAS WOODYPOC.VRP WOODYPOC.GA2 
     WOODYPOC.GA1 WOODYPOC.GA1 WOODYPOC.GA8 WOODYPOC.GA3 
     WOODYPOC.GA4 WOODYPOC.GA5 WOODYPOC.GA6 WOODYPOC.GA7 
     WOODYPOC.STR
@@ -399,7 +406,7 @@ More tips:
 
    The following command line should be used in case Basic loader may reload itself:
 
-    Caslink3 /m File1.bas File1.bas File2.bin File3.bin File4.bin
+    Caslink4 /m File1.bas File1.bas File2.bin File3.bin File4.bin
     File5.bin File6.bin File7.bin
 
  - If a game loader loads a screenshot, it is advised to remove that code and not encode the screenshot file to
@@ -475,6 +482,7 @@ Below is the history of changes made in the CasLink projects by its developer:
  Podrezov   05.09.2022   Fixed the LENGTHCORRECTION value to adjust the file size to the WAV data block size
  Podrezov   07.09.2022   Fixed the BIN chunk size for CRC calculation in both main code and single/multifile BIN loaders (thanks to Romsey)
  Podrezov   07.09.2022   Converted all MAC sources to ASM to be used with AS80 assembler by Frank Kingswood
+ Podrezov   09.05.2023   Massive rework of loaders to be able to work on computers with RAM in slot 0 or with 32kb (or less) RAM equipped with a RAM mapper
 
 
 8. Copyrights
@@ -502,7 +510,7 @@ CasLink project:
 
  Pavel Zakharov (RBSC)
  Dmitry Pugachev (RBSC)
- Alexey Krasivsky (RBSC)
+ Alexey Krasivsky
  Manuel Bilderbeek
  Wouter Vermaelen
  Danilo Drago
@@ -518,7 +526,7 @@ CasLink project:
  Ahti Soilamaa
  Saku Taipale (STT)
  Walter van Niftrik
- Duncan (Romsey)
+ Duncan Morrison (Romsey)
 
 
 10. Contact Information and Donations

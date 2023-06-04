@@ -1,5 +1,5 @@
-; BLOAD MODULE FOR MULTIFILE MODE (FOR CASLINK3 PROJECT)
-; COPYRIGHT (C) 1999-2022 ALEXEY PODREZOV
+; BLOAD MODULE FOR MULTIFILE MODE (FOR CASLINK4 PROJECT)
+; COPYRIGHT (C) 1999-2023 ALEXEY PODREZOV
 
 	org	#8200
 
@@ -18,9 +18,9 @@ loadcmd:db	#1e
 	db	",r"
 	db	13,0
 
-caslstr:db	"[CasLink3] Loading file, please wait...",0
+caslstr:db	"[CasLink4] Loading file, please wait...",0
 
-caserr:	db	"[CasLink3] Loading failed: CRC ERROR!",0
+caserr:	db	"[CasLink4] Loading failed: CRC ERROR!",0
 
 start1:	di
 	ld	hl,(starta)
